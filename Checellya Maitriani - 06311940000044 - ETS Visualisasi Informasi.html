@@ -1,0 +1,155 @@
+<html>
+
+<head>
+    <title>
+        Checellya Maitriani - 06311940000044
+    </title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<h1 class="Subject">
+    Evaluasi Tengah Semester Visualisasi Informasi
+</h1>
+
+<h3 class="Identity">
+    Checellya Maitriani - 06311940000044
+</h3>
+
+<style>
+    h1 {
+        color: rgb(146, 89, 62);
+    }
+
+    h3 {
+        color: rgb(160, 115, 57);
+    }
+
+    .Subject {
+        text-align: center;
+    }
+
+    .Identity {
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div class="chart" style="position:relative; height: 50vh; width: 80vw; margin: auto;">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
+        const labels = [
+            'United State of Amerika',
+            'Russian Federation ',
+            'Japan ',
+            'Republic of Korea ',
+            'Germany ',
+            'Ukraine ',
+            'France ',
+            'Brazil ',
+        ];
+        const datawoman = [
+            1269.84375,
+            1381.52083333333,
+            1148.69791666667,
+            654.552083333333,
+            445.604166666667,
+            304.811111111111,
+            451.311111111111,
+            317.4375,
+        ];
+        const dataman = [
+            4725.09375,
+            3411.23958333333,
+            5611.98958333333,
+            1375.10416666667,
+            1265.63541666667,
+            1430.74444444444,
+            1268.04444444444,
+            1186.61458333333,
+        ];
+
+        //datawoman[1] = null;
+        //datawoman[Number.parseInt(datawoman.length / 2, 8)] = null;
+        //dataman[dataman.length - 4] = null;
+
+        const data = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Mean of Woman Suicide Case',
+                    data: datawoman,
+                    borderColor: 'rgb(10,96,99)',
+                    backgroundColor: 'rgb(10,96,99,0.1)',
+                    pointBackgroundColor: 'rgb(230,121,94)'
+                },
+
+                {
+                    label: 'Mean of Man Suicide Case',
+                    data: dataman,
+                    borderColor: 'rgb(156,219,255)',
+                    backgroundColor: 'rgb(156,219,255,0.1)',
+                    pointBackgroundColor: 'rgb(230,121,94)'
+                }
+            ]
+        };
+
+        const config = {
+            type: 'radar',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Top 8 Rata-Rata Kasus Bunuh Diri Negara Periode 2010-2016',
+                        font: {
+                            size: 22,
+                        },
+                    },
+                    subtitle: {
+                        display: true,
+                        text: 'Sumber : Kaggle.com',
+                        font: {
+                            size: 12,
+                        },
+                    },
+                    legend: {
+                        display: true,
+                        position: "top",
+                        labels: {
+                            color: 'rgb(130,59,33)'
+                        }
+                    }
+                },
+                animations: {
+                    y: {
+                        easing: 'easeOutBack',
+                        from: (ctx) => {
+                            if (ctx.type === 'data') {
+                                if (ctx.mode === 'middle' && !ctx.dropped) {
+                                    ctx.dropped = true;
+                                    return 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        module.exports = {
+            config: config
+        };
+    </script>
+
+    <script>
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    </script>
+</body>
+
+</html>
